@@ -9,10 +9,11 @@ const SimpleInput = (props) => {
 
   const formSubmitHandler = (e) => {
     e.preventDefault();
+    console.log(enteredName);
   };
 
   return (
-    <form>
+    <form onSubmit={formSubmitHandler}>
       <div className="form-control">
         <label htmlFor="name">Your Name</label>
         <input type="text" id="name" onChange={nameInputHandler} />
