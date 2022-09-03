@@ -43,6 +43,7 @@ const SimpleInput = (props) => {
 
     console.log(enteredName);
     setEnteredNameTouched(false);
+    setEnteredEmailTouched(false);
   };
 
   const nameInputClasses = nameInputInvalid ? "form-control invalid" : "form-control ";
