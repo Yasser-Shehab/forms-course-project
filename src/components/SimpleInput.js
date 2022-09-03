@@ -1,12 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { validateEmail } from "../util/regularExpression";
 
 const SimpleInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+  const [enteredEmail, setEnteredEmail] = useState("");
+  const [enteredEmailTouched, setEnteredEmailTouched] = useState(false);
 
   const enteredNameIsValid = enteredName.trim() !== "";
   const nameInputInvalid = !enteredNameIsValid && enteredNameTouched;
+  const enteredEmailIsValid = validateEmail(enteredEmail);
+  const emailInputInvalid = !enteredEmailIsValid && enteredEmailTouched;
+  let formIsValid = false;
 
+  if (enteredNameIsValid && enteredEmailIsValid) {
+    formIsValid = true;
+  }
+
+  const emailInputBlurHandler = (e) => {
+    setEnteredEmailTouched(true);
+  };
+
+  const emailInputHandler = (e) => {
+    setEnteredEmail(e.target.value);
+  };
   const nameInputBlurHandler = (e) => {
     setEnteredNameTouched(true);
   };
@@ -29,6 +46,7 @@ const SimpleInput = (props) => {
   };
 
   const nameInputClasses = nameInputInvalid ? "form-control invalid" : "form-control ";
+  const emailInputClasses = emailInputInvalid ? "form-control invalid" : "form-control";
 
   return (
     <form onSubmit={formSubmitHandler}>
@@ -37,8 +55,18 @@ const SimpleInput = (props) => {
         <input type="text" id="name" onChange={nameInputHandler} onBlur={nameInputBlurHandler} />
         {nameInputInvalid && <p className="error-text">Name must not be empty</p>}
       </div>
+      <div className={emailInputClasses}>
+        <label htmlFor="email">Email</label>
+        <input
+          type="email"
+          id="email"
+          onChange={emailInputHandler}
+          onBlur={emailInputBlurHandler}
+        />
+        {emailInputInvalid && <p className="error-text">Email must be valid</p>}
+      </div>
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
