@@ -1,6 +1,9 @@
 import useInput from "../hooks/UseInput";
 import { validateEmail } from "../util/regularExpression";
 
+const isNotEmpty = (value) => value.trim().length > 0;
+const isEmail = (value) => validateEmail(value);
+
 const BasicForm = (props) => {
   const {
     value: nameValue,
@@ -9,7 +12,7 @@ const BasicForm = (props) => {
     hasError: nameHasError,
     valueBlurHandler: nameBlurHandler,
     reset: resetName,
-  } = useInput((value) => value.trim().length > 0);
+  } = useInput(isNotEmpty);
   const {
     value: lastNameValue,
     valueChangeHandler: lastNameChangeHandler,
@@ -17,7 +20,7 @@ const BasicForm = (props) => {
     hasError: lastNameHasError,
     valueBlurHandler: lastNameBlurHandler,
     reset: resetLastName,
-  } = useInput((value) => value.trim().length > 0);
+  } = useInput(isNotEmpty);
   const {
     value: emailValue,
     valueChangeHandler: emailChangeHandler,
@@ -25,7 +28,7 @@ const BasicForm = (props) => {
     hasError: emailHasError,
     valueBlurHandler: emailBlurHandler,
     reset: resetEmail,
-  } = useInput((value) => validateEmail(value));
+  } = useInput(isEmail);
 
   let formValid = false;
 
