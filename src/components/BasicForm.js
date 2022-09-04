@@ -1,4 +1,7 @@
+import useInput from "../hooks/UseInput";
+
 const BasicForm = (props) => {
+  const {} = useInput();
   return (
     <form>
       <div className="control-group">
