@@ -1,4 +1,4 @@
-# Project Title
+# Froms Project
 
 Forms Validation and Best Practices Project from Max's Course
 
